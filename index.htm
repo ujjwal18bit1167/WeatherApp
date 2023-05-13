@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8"  >
+  <title>Weather App</title>
+  <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+
+<body>
+
+
+
+
+   <div class="container-fluid">
+
+
+    <article class="widget">
+
+
+<div class="" style="margin:auto">
+  <span>
+    <form  action="/form" method="post" >
+
+      <input type="text" name="city" placeholder="Enter city" size="85" required>
+      <button class ="btn btn-primary"type="submit">Go</button>
+
+
+    </form>
+  </span>
+
+
+  <h5 align="center">OR</h5>
+
+ <span>
+    <form class="" action="/" method="get">
+
+      <div class="flex-parent jc-center"><button  class ="btn btn-primary" type="submit">Use my location</button></div>
+    </form>
+ </span>
+</div>
+
+
+
+
+
+
+      <div id="weathericon" class="weatherIcon">  <h3 id="find" style=" text-align: center ">Locating...</h3></div>
+      <div class="weatherInfo">
+        <div class="temperature"> <span id ="temp"></span></div>
+        <div class="description">
+          <div class="weatherCondition" id = "weathercondition">  </div>
+          <div class="place" id ="place"></div>
+        </div>
+      </div>
+      <div class="date" id="d"></div>
+    </article>
+  <footer class="b"><h4>Created By : Ujjwal Gupta</h4></footer>
+
+
+
+<script>
+navigator.geolocation.getCurrentPosition((position) => {
+  const lat = position.coords.latitude;
+  const lon = position.coords.longitude;
+  console.log(lat);
+  console.log(lon);
+  document.getElementById("find").innerHTML = "";
+  const data ={lat,lon};
+
+  const options={
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers:{
+      'Content-Type':'application/json'
+    }
+  };
+
+
+  fetch('/api',options).then(response =>
+    {
+     response.json().then(function(result) {
+
+        document.getElementById("weathericon").innerHTML = "<img src=" + result.kindOfimgurl+" width=35% height=100%>"
+        document.getElementById("temp").innerHTML = result.kindOftemp+"&degC";
+        document.getElementById("weathercondition").innerHTML = result.kindOfweatherDescription;
+        document.getElementById("place").textContent = result.city;
+      document.getElementById("d").innerHTML = result.kindofdate+" "+result.kindOfmonth+"<br> &nbsp;&nbsp;"+result.kindofyear;
+        console.log(result)
+         });
+
+
+    });
+
+
+
+});
+
+
+
+</script>
+
+
+
+</body>
+
+</html>
