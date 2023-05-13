@@ -8,4 +8,4 @@ Technologies used: HTML, CSS, JavaScript, Bootstrap, NodeJs, Express, Geolocatio
 
 
 
-Note: The **API Key** has been removed from the code due to security issues. Before cloning or downloading the project, please go to https://openweathermap.org/api , sign up to **generate API Key** and **copy paste** that API Key to the file **app.js** in **line 30** and **line 109**.
+
